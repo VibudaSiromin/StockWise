@@ -1,0 +1,394 @@
+(defrule Main
+ (not (investOrTrade ?))
+=> (printout t crlf crlf
+"You want to" crlf crlf 
+"1) Invest" crlf crlf 
+"2) Trade" crlf crlf
+"Enter your choice here (1|2): " )
+(assert (investOrTrade (read))))
+;--------------------------------
+(defrule Type_Of_Industry
+(investOrTrade 1)
+?retractVar0 <- (investOrTrade 1)
+(not (typeOfIndustry ?))
+ =>  (retract ?retractVar0)
+  (printout t crlf crlf
+"Type of Industry ?" crlf crlf 
+"1) Finance" crlf crlf 
+"2) Production Based" crlf crlf
+"3) Real State" crlf crlf
+"4) Food,Beverage and Tobacco" crlf crlf
+"5) Hotel" crlf crlf
+"Your answer (1|2|3|4|5): " )
+ (assert (typeOfIndustry (read))))
+;--------------------------------
+(defrule Type_Of_Finance
+(typeOfIndustry 1)
+?retractVar1 <- (typeOfIndustry 1)
+(not (typeOfFinance ?))
+ =>  (retract ?retractVar1 )
+  (printout t crlf crlf
+"What is the type ?" crlf crlf 
+"1) Finance & Leasing" crlf crlf 
+"2) Banking" crlf crlf
+"3) Insurance" crlf crlf
+"Your answer (1|2|3): " )
+ (assert (typeOfFinance (read))))
+;--------------------------------
+(defrule Finance_Companies
+(typeOfFinance 1)
+?retractVar1 <- (typeOfFinance 1)
+(not (basedOn ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Based on what ?" crlf crlf 
+"1) Gold Based" crlf crlf 
+"2) Vehicle Based" crlf crlf
+"Your answer (1|2): " )
+ (assert (basedOn (read))))
+;--------------------------------
+(defrule Gold_Based
+(basedOn 1)
+?retractVar1 <- (basedOn 1)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - LFIN.N"))
+;--------------------------------
+(defrule Vehicle_Based
+(basedOn 2)
+?retractVar1 <- (basedOn 2)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - VFIN.N"))
+;--------------------------------
+(defrule Banking
+(typeOfFinance 2)
+?retractVar1 <- (typeOfFinance 2)
+(not (returnOnAsset ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Prefered Return on Asset ?" crlf crlf 
+"1) Greater than 15%  " crlf crlf 
+"2) Less than 15%" crlf crlf
+"Your answer (1|2): " )
+ (assert (returnOnAsset (read))))
+ ;------------------------------
+ (defrule Greater_than_15
+(returnOnAsset 1)
+?retractVar1 <- (returnOnAsset 1)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - PABC.N"))
+ ;-------------------------------
+ (defrule Less_than_15
+(returnOnAsset 2)
+?retractVar1 <- (returnOnAsset 2)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - HNB.N"))
+ ;-------------------------------
+(defrule Insurance
+(typeOfFinance 3)
+?retractVar1 <- (typeOfFinance 3)
+(not (yearOnYearGrowth ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Prefered year on year growth?" crlf crlf 
+"1) Greater than 10%  " crlf crlf 
+"2) Less than 10%" crlf crlf
+"Your answer (1|2): " )
+ (assert (yearOnYearGrowth (read))))
+ ;-------------------------------
+ (defrule Greater_than_10
+(yearOnYearGrowth 1)
+?retractVar1 <- (yearOnYearGrowth 1)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - HASU.N"))
+ ;-------------------------------
+ (defrule Less_than_10
+(yearOnYearGrowth 2)
+?retractVar1 <- (yearOnYearGrowth 2)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - JINS.N"))
+ ;-------------------------------
+ (defrule Type_Of_Production
+(typeOfIndustry 2)
+?retractVar1 <- (typeOfIndustry 2)
+(not (typeOfProduction ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"What is the type of production" crlf crlf 
+"1) Tile Sector" crlf crlf 
+"2) Energy Sector" crlf crlf
+"3) Plantation Sector" crlf crlf
+"Your answer (1|2|3): " )
+ (assert (typeOfProduction (read))))
+ ;-------------------------------
+  (defrule Market_Share
+(typeOfProduction 1)
+?retractVar1 <- (typeOfProduction 1)
+(not (marketShare ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Market Share of the Tile Market ?" crlf crlf 
+"1) More than 10%" crlf crlf 
+"2) Less than 10%" crlf crlf
+"Your answer (1|2): " )
+ (assert (marketShare (read))))
+ ;--------------------------------
+(defrule Market_Share_Greater_Than
+(marketShare 1)
+?retractVar1 <- (marketShare 1)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - RCL.N"))
+ ;--------------------------------
+(defrule Market_Share_Less_Than
+(marketShare 2)
+?retractVar1 <- (marketShare 2)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - LWL.N"))
+ ;--------------------------------
+  (defrule Type_Of_Energy
+(typeOfProduction 2)
+?retractVar1 <- (typeOfProduction 2)
+(not (typeOfEnergy ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Type Of Energy ?" crlf crlf 
+"1) Renewable Energy" crlf crlf 
+"2) Non-Renewable Energy" crlf crlf
+"Your answer (1|2): " )
+ (assert (typeOfEnergy (read))))
+ ;--------------------------------
+(defrule Renewable_Energy
+(typeOfEnergy 1)
+?retractVar1 <- (typeOfEnergy 1)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - VPEL.N"))
+ ;--------------------------------
+(defrule Non_Renewable_Energy
+(typeOfEnergy 2)
+?retractVar1 <- (typeOfEnergy 2)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - LIOC.N"))
+ ;--------------------------------
+ (defrule Exports_percentage_from_Revenue
+(typeOfProduction 3)
+?retractVar1 <- (typeOfProduction 3)
+(not (exportsPercentageFromRevenue ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Percentage of Exports ?" crlf crlf 
+"1) More than 60%" crlf crlf 
+"2) Less than 60%" crlf crlf
+"Your answer (1|2): " )
+ (assert (exportsPercentageFromRevenue (read))))
+ ;--------------------------------
+(defrule Mora_Than_60
+(exportsPercentageFromRevenue 1)
+?retractVar1 <- (exportsPercentageFromRevenue 1)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - TPL.N"))
+ ;--------------------------------
+(defrule Less_Than_60
+(exportsPercentageFromRevenue 2)
+?retractVar1 <- (exportsPercentageFromRevenue 2)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - AGAL.N"))
+ ;--------------------------------
+  (defrule Based_On_What
+(typeOfIndustry 3)
+?retractVar1 <- (typeOfIndustry 3)
+(not (basedOnWhat ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Based on what ?" crlf crlf 
+"1) Land Based" crlf crlf 
+"2) Apartment Based" crlf crlf
+"Your answer (1|2|3): " )
+(assert (basedOnWhat (read))))
+ ;--------------------------------
+(defrule Land_Based
+(basedOnWhat 1)
+?retractVar1 <- (basedOnWhat 1)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - PLR.N"))
+ ;--------------------------------
+(defrule Apartment_Based
+(basedOnWhat 2)
+?retractVar1 <- (basedOnWhat 2)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - OSEA.N"))
+ ;--------------------------------
+  (defrule Food_Beverage_Tobacco
+(typeOfIndustry 4)
+?retractVar1 <- (typeOfIndustry 4)
+(not (foodBeverageTobacco ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Which from the Food, Beverage and Tobacco ?" crlf crlf 
+"1) Food" crlf crlf 
+"2) Beverage" crlf crlf
+"3) Tobacco" crlf crlf
+"Your answer (1|2|3): " )
+(assert (foodBeverageTobacco (read))))
+ ;------------------------------
+  (defrule Do_They_Produce
+(foodBeverageTobacco 1)
+?retractVar1 <- (foodBeverageTobacco 1)
+(not (doTheyProduce ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Do you want a company produce on their own factories ?" crlf crlf 
+"1) Yes" crlf crlf 
+"2) No" crlf crlf
+"Your answer (y|n): " )
+(assert (doTheyProduce (read))))
+ ;--------------------------------
+ (defrule Produce_themselves
+(doTheyProduce y)
+?retractVar1 <- (doTheyProduce y)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - SOY.N"))
+ ;--------------------------------
+  (defrule No_Produce_themselves
+(doTheyProduce n)
+?retractVar1 <- (doTheyProduce n)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - KFP.N"))
+ ;--------------------------------
+   (defrule Alcohol_Based_Or_Not
+(foodBeverageTobacco 2)
+?retractVar1 <- (foodBeverageTobacco 2)
+(not (alcoholBasedOrNot ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Alcohol Based or not ?" crlf crlf 
+"1) Yes" crlf crlf 
+"2) No" crlf crlf
+"Your answer (y|n): " )
+(assert (alcoholBasedOrNot (read))))
+ ;--------------------------------
+ (defrule Alcohol_Based
+(alcoholBasedOrNot y)
+?retractVar1 <- (alcoholBasedOrNot y)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - DIST.N"))
+ ;--------------------------------
+  (defrule Not_Alcohol_Based
+(alcoholBasedOrNot n)
+?retractVar1 <- (alcoholBasedOrNot n)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - LMF.N"))
+ ;--------------------------------
+  (defrule Tobacco
+(foodBeverageTobacco 3)
+?retractVar1 <- (foodBeverageTobacco 3)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - CTC.N"))
+ ;--------------------------------
+  (defrule Focus_On_Whom
+(typeOfIndustry 5)
+?retractVar1 <- (typeOfIndustry 5)
+(not (focusOnWhom ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Focus on whom ?" crlf crlf 
+"1) Local Tourists" crlf crlf 
+"2) Foreign Tourists" crlf crlf
+"Your answer (1|2): " )
+(assert (focusOnWhom (read))))
+ ;--------------------------------
+(defrule Local_Tourists
+(focusOnWhom 1)
+?retractVar1 <- (focusOnWhom 1)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - MRH.N"))
+ ;--------------------------------
+(defrule Foreign_Tourists
+(focusOnWhom 2)
+?retractVar1 <- (focusOnWhom 2)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - AHUN.N"))
+ ;--------------------------------
+    (defrule Beta_Value
+(investOrTrade 2)
+?retractVar1 <- (investOrTrade 2)
+(not (betaValue ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Beta value should be ?" crlf crlf 
+"1) Greater than 1 less than 2" crlf crlf 
+"2) Greater than 2" crlf crlf
+"Your answer (1|2): " )
+(assert (betaValue (read))))
+ ;--------------------------------
+    (defrule Daily_Turnover
+(betaValue 1)
+?retractVar1 <- (betaValue 1)
+(not (dailyTurnover ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Daily Turnover should be ?" crlf crlf 
+"1) Greater than 2 million" crlf crlf 
+"2) Less than 2 million" crlf crlf
+"Your answer (1|2): " )
+(assert (dailyTurnover (read))))
+ ;--------------------------------
+  (defrule Greater_Than_2_Million
+(dailyTurnover 1)
+?retractVar1 <- (dailyTurnover 1)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - EXPO.N"))
+ ;--------------------------------
+  (defrule Less_Than_2_Million
+(dailyTurnover 2)
+?retractVar1 <- (dailyTurnover 2)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - UBF.N"))
+ ;--------------------------------
+    (defrule Monthly_Turnover
+(betaValue 2)
+?retractVar1 <- (betaValue 2)
+(not (monthlyTurnover ?))
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Monthly Turnover should be ?" crlf crlf 
+"1) Greater than 10 million" crlf crlf 
+"2) Less than 10 million" crlf crlf
+"Your answer (1|2): " )
+(assert (monthlyTurnover (read))))
+ ;--------------------------------
+  (defrule Greater_Than_10_Million
+(monthlyTurnover 1)
+?retractVar1 <- (monthlyTurnover 1)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - AAIC.N"))
+ ;--------------------------------
+  (defrule Less_Than_10_Million
+(monthlyTurnover 2)
+?retractVar1 <- (monthlyTurnover 2)
+ =>  (retract ?retractVar1)
+  (printout t crlf crlf
+"Recommended stock - SINH.N"))
+ ;--------------------------------
